@@ -13,6 +13,7 @@ class OpenCVConan(ConanFile):
     description = 'OpenCV recipe for the opencv repository'
     url = 'https://github.com/piponazo/conan-opencv'
     source_url = 'https://github.com/opencv/opencv.git'
+    source_contrib_url = 'https://github.com/opencv/opencv_contrib.git'
     license = 'MIT'
     generators = 'cmake'
 
@@ -31,6 +32,7 @@ class OpenCVConan(ConanFile):
         'opencv_objdetect': [True, False],
         'opencv_photo': [True, False],
         'opencv_stitching': [True, False],
+        'opencv_dnn_modern': [True, False],
         'precompiled_headers': [True, False],
         'ffmpeg': [True, False],
         'webcam': [True, False],
@@ -41,7 +43,7 @@ class OpenCVConan(ConanFile):
         'opencv_features2d=True', \
         'opencv_flann=True', \
         'opencv_ml=True', \
-        'opencv_video=False', \
+        'opencv_video=True', \
         'opencv_imgproc=True', \
         'opencv_calib3d=True', \
         'opencv_highgui=True', \
@@ -51,13 +53,15 @@ class OpenCVConan(ConanFile):
         'opencv_objdetect=False', \
         'opencv_photo=False', \
         'opencv_stitching=False', \
+        'opencv_dnn_modern=False', \
         'precompiled_headers=True', \
-        'ffmpeg=False', \
-        'webcam=False', \
+        'ffmpeg=True', \
+        'webcam=True', \
         'shared=True'
 
     def source(self):
         self.run('git clone --depth 1 --branch %s %s' % (self.version, self.source_url))
+        self.run('git clone --depth 1 --branch %s %s' % (self.version, self.source_contrib_url))
 
     def build(self):
         tools.replace_in_file("opencv/CMakeLists.txt",
@@ -98,6 +102,8 @@ class OpenCVConan(ConanFile):
             'BUILD_opencv_videoio': self.options.opencv_videoio,
             'BUILD_opencv_videostab' : 'OFF',
             'BUILD_opencv_world' : 'OFF',
+            'BUILD_opencv_dnn_modern' : self.options.opencv_dnn_modern,
+            'BUILD_opencv_text' : 'OFF',
 
             'BUILD_opencv_java' : 'OFF',
             'BUILD_opencv_python2' : 'OFF',
@@ -142,6 +148,8 @@ class OpenCVConan(ConanFile):
             'CPU_BASELINE' : 'SSE3;SSE4_1',
             'CPU_DISPATCH' : '',
             #'CPU_DISPATCH' : 'SSE4_2;AVX;AVX2',
+
+            'OPENCV_EXTRA_MODULES_PATH' : '../opencv_contrib/modules/',
 
             'ENABLE_PRECOMPILED_HEADERS' : 'ON',
         }
