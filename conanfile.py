@@ -11,7 +11,7 @@ class OpenCVConan(ConanFile):
     version = '3.3.0'
     settings = 'os', 'compiler', 'build_type', 'arch'
     description = 'OpenCV recipe for the opencv repository'
-    url = 'https://github.com/piponazo/conan-opencv'
+    url = 'https://github.com/damiles/conan-opencv'
     source_url = 'https://github.com/opencv/opencv.git'
     source_contrib_url = 'https://github.com/opencv/opencv_contrib.git'
     license = 'MIT'
