@@ -182,7 +182,7 @@ class OpenCVConan(ConanFile):
             'BUILD_opencv_java' : self.options.opencv_java,
             'BUILD_opencv_java_bindings_gen': self.options.opencv_java_bindings_gen,
             'BUILD_opencv_js': self.options.opencv_js,
-            'BUILD_opencv_line_descriptor':: self.options.opencv_line_descriptor,
+            'BUILD_opencv_line_descriptor': self.options.opencv_line_descriptor,
             'BUILD_opencv_ml': self.options.opencv_ml,
             'BUILD_opencv_objdetect': self.options.opencv_objdetect,
             'BUILD_opencv_optflow': self.options.opencv_optflow,
